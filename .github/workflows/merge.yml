@@ -70,7 +70,7 @@ jobs:
       - name: Build and push (not main merge)
         if: github.ref != 'refs/heads/main'
         id: docker_build_release
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'push') && github.repository == 'odpi/egeria-connector-hivemetastore' }}
           tags: odpi/egeria-connector-hivemetastore:${{env.RELEASE_VERSION}},quay.io/odpi/egeria-connector-hivemetastore:${{env.RELEASE_VERSION}}
@@ -82,7 +82,7 @@ jobs:
       - name: Build and push (main merge)
         if: github.ref == 'refs/heads/main'
         id: docker_build_main
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: ${{ (github.event_name == 'workflow_dispatch' || github.event_name == 'push') && github.repository == 'odpi/egeria-connector-hivemetastore' }}
           tags: odpi/egeria-connector-hivemetastore:${{ env.RELEASE_VERSION}}, odpi/egeria-connector-hivemetastore:latest, quay.io/odpi/egeria-connector-hivemetastore:${{ env.RELEASE_VERSION}}, quay.io/odpi/egeria-connector-hivemetastore:latest
